@@ -15,6 +15,9 @@ import { DashboardData } from '../../types';
 import ChildrenList from './ChildrenList';
 import ProductsList from './ProductsList';
 import InvitationsList from './InvitationsList';
+import { Product, Invitation } from '../../types';
+import { AxiosError } from 'axios';
+import { productsService, invitationsService } from '../../services/api';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -45,18 +48,30 @@ function TabPanel(props: TabPanelProps) {
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState(0);
-    const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [invitations, setInvitations] = useState<Invitation[]>([]);
+    const [representativeName, setRepresentativeName] = useState<string>('');
 
     useEffect(() => {
-        const fetchDashboardData = async () => {
+        const loadDashboard = async () => {
             try {
-                const data = await dashboardService.getDashboard();
-                setDashboardData(data);
+                const [productsData, invitationsData] = await Promise.all([
+                    productsService.getProducts(),
+                    invitationsService.getInvitations()
+                ]);
+                setProducts(productsData);
+                setInvitations(invitationsData);
+                // Obtener el nombre del representante del localStorage
+                const userId = localStorage.getItem('userId');
+                if (userId) {
+                    // Por ahora, usamos un nombre genérico
+                    setRepresentativeName('Usuario');
+                }
             } catch (error) {
                 console.error('Error al cargar el dashboard:', error);
                 // Si hay un error de autenticación, redirigir al login
-                if (error.response?.status === 401) {
+                if (error instanceof AxiosError && error.response?.status === 401) {
                     navigate('/login');
                 }
             } finally {
@@ -64,7 +79,7 @@ const Dashboard: React.FC = () => {
             }
         };
 
-        fetchDashboardData();
+        loadDashboard();
     }, [navigate]);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -73,6 +88,7 @@ const Dashboard: React.FC = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
         navigate('/login');
     };
 
@@ -84,14 +100,6 @@ const Dashboard: React.FC = () => {
         );
     }
 
-    if (!dashboardData) {
-        return (
-            <Container>
-                <Typography>Error al cargar los datos</Typography>
-            </Container>
-        );
-    }
-
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
@@ -99,7 +107,7 @@ const Dashboard: React.FC = () => {
                     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                             <Typography component="h1" variant="h4">
-                                Bienvenido, {dashboardData.representative.full_name}
+                                Bienvenido, {representativeName}
                             </Typography>
                             <Button variant="outlined" color="error" onClick={handleLogout}>
                                 Cerrar Sesión
@@ -113,13 +121,13 @@ const Dashboard: React.FC = () => {
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
-                            <ChildrenList children={dashboardData.children} />
+                            <ChildrenList children={[]} />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <ProductsList products={dashboardData.products} />
+                            <ProductsList products={products} />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            <InvitationsList invitations={dashboardData.invitations} />
+                            <InvitationsList invitations={invitations} />
                         </TabPanel>
                     </Paper>
                 </Grid>

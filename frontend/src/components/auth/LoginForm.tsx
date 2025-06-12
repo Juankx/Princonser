@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -8,6 +8,7 @@ import {
     Typography,
     Container,
     Paper,
+    Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../services/api';
@@ -19,6 +20,7 @@ const validationSchema = yup.object({
 
 const LoginForm: React.FC = () => {
     const navigate = useNavigate();
+    const [error, setError] = useState<string>('');
 
     const formik = useFormik({
         initialValues: {
@@ -28,12 +30,15 @@ const LoginForm: React.FC = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
+                setError('');
                 const response = await authService.login(values);
+                // Guardamos el token y el ID del usuario
                 localStorage.setItem('token', response.access_token);
+                localStorage.setItem('userId', response.user.id.toString());
                 navigate('/dashboard');
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error al iniciar sesión:', error);
-                // TODO: Mostrar mensaje de error
+                setError(error.response?.data?.detail || 'Error al iniciar sesión. Por favor, verifica tus credenciales.');
             }
         },
     });
@@ -61,6 +66,11 @@ const LoginForm: React.FC = () => {
                     <Typography component="h1" variant="h5">
                         Iniciar Sesión
                     </Typography>
+                    {error && (
+                        <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
+                            {error}
+                        </Alert>
+                    )}
                     <Box
                         component="form"
                         onSubmit={formik.handleSubmit}

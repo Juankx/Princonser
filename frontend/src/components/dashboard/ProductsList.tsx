@@ -53,7 +53,10 @@ const ProductsList: React.FC<ProductsListProps> = ({ products: initialProducts }
                         product.id === updatedProduct.id ? updatedProduct : product
                     ));
                 } else {
-                    const newProduct = await productsService.createProduct(values);
+                    const newProduct = await productsService.createProduct({
+                        ...values,
+                        is_active: true
+                    });
                     setProducts([...products, newProduct]);
                 }
                 handleClose();
