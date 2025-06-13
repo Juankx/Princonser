@@ -1,69 +1,85 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   build: {
     outDir: 'dist',
     sourcemap: true,
     rollupOptions: {
-      external: [
-        'deepmerge',
-        'tiny-warning',
-        'hoist-non-react-statics',
-        'clsx',
-        '@emotion/styled',
-        '@emotion/react',
-        '@emotion/cache',
-        '@popperjs/core',
-        'prop-types'
-      ],
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          mui: ['@mui/material', '@mui/icons-material'],
-          axios: ['axios'],
-          emotion: ['@emotion/styled', '@emotion/react', '@emotion/cache'],
-          popper: ['@popperjs/core'],
-          propTypes: ['prop-types']
-        }
-      }
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+          'utils-vendor': ['clsx', 'date-fns', 'axios'],
+        },
+      },
+      external: [
+        'prop-types',
+        'tiny-warning',
+        'deepmerge',
+        'clsx',
+        'date-fns',
+        'axios',
+        '@emotion/react',
+        '@emotion/styled',
+        '@mui/material',
+        '@mui/icons-material',
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'ReactPropTypesSecret',
+      ],
     }
   },
   optimizeDeps: {
     include: [
-      'react',
-      'react-dom',
+      'prop-types',
+      'tiny-warning',
+      'deepmerge',
+      'clsx',
+      'date-fns',
+      'axios',
+      '@emotion/react',
+      '@emotion/styled',
       '@mui/material',
       '@mui/icons-material',
-      'axios'
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'ReactPropTypesSecret',
     ],
-    exclude: [
-      'deepmerge',
-      'tiny-warning',
-      'hoist-non-react-statics',
-      'clsx',
-      '@emotion/styled',
-      '@emotion/react',
-      '@emotion/cache',
-      '@popperjs/core',
-      'prop-types'
-    ]
+    exclude: [],
   },
   resolve: {
     alias: {
-      'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js',
-      'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js',
-      'clsx': 'clsx/dist/clsx.mjs',
-      '@emotion/styled': '@emotion/styled/dist/emotion-styled.esm.js',
-      '@emotion/react': '@emotion/react/dist/emotion-react.esm.js',
-      '@emotion/cache': '@emotion/cache/dist/emotion-cache.esm.js',
-      '@popperjs/core': '@popperjs/core/dist/esm/popper.js',
-      'prop-types': 'prop-types/index.js'
+      '@': path.resolve(__dirname, './src'),
+      'prop-types': path.resolve(__dirname, 'node_modules/prop-types'),
+      'tiny-warning': path.resolve(__dirname, 'node_modules/tiny-warning'),
+      'deepmerge': path.resolve(__dirname, 'node_modules/deepmerge'),
+      'clsx': path.resolve(__dirname, 'node_modules/clsx'),
+      'date-fns': path.resolve(__dirname, 'node_modules/date-fns'),
+      'axios': path.resolve(__dirname, 'node_modules/axios'),
+      '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
+      '@emotion/styled': path.resolve(__dirname, 'node_modules/@emotion/styled'),
+      '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material'),
+      '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material'),
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+      'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
+      'ReactPropTypesSecret': path.resolve(__dirname, 'node_modules/react/lib/ReactPropTypesSecret'),
     }
   }
 }) 
