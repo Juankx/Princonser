@@ -14,7 +14,8 @@ export default defineConfig({
       external: [
         'deepmerge',
         'tiny-warning',
-        'hoist-non-react-statics'
+        'hoist-non-react-statics',
+        'clsx'
       ],
       output: {
         manualChunks: {
@@ -29,14 +30,16 @@ export default defineConfig({
     exclude: [
       'deepmerge',
       'tiny-warning',
-      'hoist-non-react-statics'
+      'hoist-non-react-statics',
+      'clsx'
     ]
   },
   resolve: {
     mainFields: ['module', 'jsnext:main', 'jsnext', 'browser', 'main'],
     alias: {
       'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js',
-      'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js'
+      'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js',
+      'clsx': 'clsx/dist/clsx.mjs'
     }
   }
 }) 
