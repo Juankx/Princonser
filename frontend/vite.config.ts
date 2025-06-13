@@ -20,7 +20,8 @@ export default defineConfig({
         '@emotion/styled',
         '@emotion/react',
         '@emotion/cache',
-        '@popperjs/core'
+        '@popperjs/core',
+        'prop-types'
       ],
       output: {
         manualChunks: {
@@ -28,7 +29,8 @@ export default defineConfig({
           mui: ['@mui/material', '@mui/icons-material'],
           axios: ['axios'],
           emotion: ['@emotion/styled', '@emotion/react', '@emotion/cache'],
-          popper: ['@popperjs/core']
+          popper: ['@popperjs/core'],
+          propTypes: ['prop-types']
         }
       }
     }
@@ -44,7 +46,8 @@ export default defineConfig({
       '@emotion/styled',
       '@emotion/react',
       '@emotion/cache',
-      '@popperjs/core'
+      '@popperjs/core',
+      'prop-types'
     ]
   },
   resolve: {
@@ -57,7 +60,8 @@ export default defineConfig({
       '@emotion/styled': '@emotion/styled/dist/emotion-styled.esm.js',
       '@emotion/react': '@emotion/react/dist/emotion-react.esm.js',
       '@emotion/cache': '@emotion/cache/dist/emotion-cache.esm.js',
-      '@popperjs/core': '@popperjs/core/dist/esm/popper.js'
+      '@popperjs/core': '@popperjs/core/dist/esm/popper.js',
+      'prop-types': 'prop-types/index.js'
     }
   }
 }) 
