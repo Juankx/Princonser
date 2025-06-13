@@ -22,7 +22,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled', '@emotion/cache'],
           'utils-vendor': ['clsx', 'date-fns', 'axios', 'hoist-non-react-statics'],
         },
       },
@@ -35,6 +35,7 @@ export default defineConfig({
         'axios',
         '@emotion/react',
         '@emotion/styled',
+        '@emotion/cache',
         '@mui/material',
         '@mui/icons-material',
         'react',
@@ -55,6 +56,7 @@ export default defineConfig({
       'axios',
       '@emotion/react',
       '@emotion/styled',
+      '@emotion/cache',
       '@mui/material',
       '@mui/icons-material',
       'react',
@@ -76,6 +78,7 @@ export default defineConfig({
       'axios': path.resolve(__dirname, 'node_modules/axios'),
       '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
       '@emotion/styled': path.resolve(__dirname, 'node_modules/@emotion/styled'),
+      '@emotion/cache': path.resolve(__dirname, 'node_modules/@emotion/cache'),
       '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material'),
       '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material'),
       'react': path.resolve(__dirname, 'node_modules/react'),
