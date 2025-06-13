@@ -50,7 +50,7 @@ export default defineConfig({
       '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material'),
       '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
       '@emotion/styled': path.resolve(__dirname, 'node_modules/@emotion/styled'),
-      'axios': path.resolve(__dirname, 'node_modules/axios'),
+      'axios': path.resolve(__dirname, 'node_modules/axios/dist/axios.js'),
       'clsx': path.resolve(__dirname, 'node_modules/clsx'),
       'tiny-warning': path.resolve(__dirname, 'node_modules/tiny-warning'),
       'hoist-non-react-statics': path.resolve(__dirname, 'node_modules/hoist-non-react-statics'),
