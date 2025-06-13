@@ -26,6 +26,7 @@ export default defineConfig({
       }
     },
     rollupOptions: {
+      external: ['axios'],
       output: {
         manualChunks: {
           vendor: [
@@ -69,12 +70,11 @@ export default defineConfig({
       '@mui/icons-material',
       '@emotion/react',
       '@emotion/styled',
-      'axios',
       'formik',
       'yup',
       'date-fns',
       'deepmerge'
     ],
-    exclude: [],
+    exclude: ['axios']
   },
 }) 
