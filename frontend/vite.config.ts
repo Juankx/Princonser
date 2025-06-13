@@ -10,10 +10,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true
+    rollupOptions: {
+      external: ['deepmerge'],
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mui: ['@mui/material', '@mui/icons-material']
+        }
+      }
     }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+    exclude: ['deepmerge']
   },
   resolve: {
     mainFields: ['module', 'jsnext:main', 'jsnext', 'browser', 'main']
