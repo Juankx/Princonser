@@ -23,7 +23,7 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
-          'utils-vendor': ['clsx', 'date-fns', 'axios'],
+          'utils-vendor': ['clsx', 'date-fns', 'axios', 'hoist-non-react-statics'],
         },
       },
       external: [
@@ -41,6 +41,7 @@ export default defineConfig({
         'react-dom',
         'react-router-dom',
         'ReactPropTypesSecret',
+        'hoist-non-react-statics',
       ],
     }
   },
@@ -60,6 +61,7 @@ export default defineConfig({
       'react-dom',
       'react-router-dom',
       'ReactPropTypesSecret',
+      'hoist-non-react-statics',
     ],
     exclude: [],
   },
@@ -80,6 +82,7 @@ export default defineConfig({
       'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
       'ReactPropTypesSecret': path.resolve(__dirname, 'node_modules/react/lib/ReactPropTypesSecret'),
+      'hoist-non-react-statics': path.resolve(__dirname, 'node_modules/hoist-non-react-statics'),
     }
   }
 }) 
