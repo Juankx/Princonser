@@ -56,7 +56,8 @@ export default defineConfig({
       'hoist-non-react-statics': path.resolve(__dirname, 'node_modules/hoist-non-react-statics'),
       '@popperjs/core': path.resolve(__dirname, 'node_modules/@popperjs/core'),
       'prop-types': path.resolve(__dirname, 'node_modules/prop-types'),
-      '@emotion/cache': path.resolve(__dirname, 'node_modules/@emotion/cache')
+      '@emotion/cache': path.resolve(__dirname, 'node_modules/@emotion/cache'),
+      'deepmerge': path.resolve(__dirname, 'node_modules/deepmerge/dist/umd.js')
     },
   },
   optimizeDeps: {
@@ -71,7 +72,8 @@ export default defineConfig({
       'axios',
       'formik',
       'yup',
-      'date-fns'
+      'date-fns',
+      'deepmerge'
     ],
     exclude: [],
   },
