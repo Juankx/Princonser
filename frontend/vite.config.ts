@@ -15,12 +15,14 @@ export default defineConfig({
         'deepmerge',
         'tiny-warning',
         'hoist-non-react-statics',
-        'clsx'
+        'clsx',
+        'axios'
       ],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          mui: ['@mui/material', '@mui/icons-material']
+          mui: ['@mui/material', '@mui/icons-material'],
+          axios: ['axios']
         }
       }
     }
@@ -31,7 +33,8 @@ export default defineConfig({
       'deepmerge',
       'tiny-warning',
       'hoist-non-react-statics',
-      'clsx'
+      'clsx',
+      'axios'
     ]
   },
   resolve: {
@@ -39,7 +42,8 @@ export default defineConfig({
     alias: {
       'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js',
       'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js',
-      'clsx': 'clsx/dist/clsx.mjs'
+      'clsx': 'clsx/dist/clsx.mjs',
+      'axios': 'axios/dist/axios.js'
     }
   }
 }) 
