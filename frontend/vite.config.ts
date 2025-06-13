@@ -21,7 +21,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled', '@emotion/cache', '@popperjs/core'],
           'utils-vendor': ['clsx', 'date-fns', 'axios', 'hoist-non-react-statics'],
         },
       },
