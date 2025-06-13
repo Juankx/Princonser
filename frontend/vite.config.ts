@@ -16,7 +16,6 @@ export default defineConfig({
         'tiny-warning',
         'hoist-non-react-statics',
         'clsx',
-        'axios',
         '@emotion/styled',
         '@emotion/react',
         '@emotion/cache',
@@ -36,13 +35,18 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+    include: [
+      'react',
+      'react-dom',
+      '@mui/material',
+      '@mui/icons-material',
+      'axios'
+    ],
     exclude: [
       'deepmerge',
       'tiny-warning',
       'hoist-non-react-statics',
       'clsx',
-      'axios',
       '@emotion/styled',
       '@emotion/react',
       '@emotion/cache',
@@ -51,12 +55,10 @@ export default defineConfig({
     ]
   },
   resolve: {
-    mainFields: ['module', 'jsnext:main', 'jsnext', 'browser', 'main'],
     alias: {
       'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js',
       'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js',
       'clsx': 'clsx/dist/clsx.mjs',
-      'axios': 'axios/dist/axios.js',
       '@emotion/styled': '@emotion/styled/dist/emotion-styled.esm.js',
       '@emotion/react': '@emotion/react/dist/emotion-react.esm.js',
       '@emotion/cache': '@emotion/cache/dist/emotion-cache.esm.js',
