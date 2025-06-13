@@ -11,7 +11,7 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     rollupOptions: {
-      external: ['deepmerge'],
+      external: ['deepmerge', 'tiny-warning'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
@@ -22,9 +22,12 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
-    exclude: ['deepmerge']
+    exclude: ['deepmerge', 'tiny-warning']
   },
   resolve: {
-    mainFields: ['module', 'jsnext:main', 'jsnext', 'browser', 'main']
+    mainFields: ['module', 'jsnext:main', 'jsnext', 'browser', 'main'],
+    alias: {
+      'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js'
+    }
   }
 }) 
