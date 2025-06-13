@@ -19,11 +19,6 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     rollupOptions: {
-      output: {
-        manualChunks: {
-          'utils-vendor': ['clsx', 'date-fns', 'axios', 'hoist-non-react-statics'],
-        },
-      },
       external: [
         'prop-types',
         'tiny-warning',
@@ -43,7 +38,7 @@ export default defineConfig({
         'ReactPropTypesSecret',
         'hoist-non-react-statics',
       ],
-    }
+    },
   },
   optimizeDeps: {
     include: [
