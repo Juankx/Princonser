@@ -22,7 +22,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled', '@emotion/cache'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled', '@emotion/cache', '@popperjs/core'],
           'utils-vendor': ['clsx', 'date-fns', 'axios', 'hoist-non-react-statics'],
         },
       },
@@ -38,6 +38,7 @@ export default defineConfig({
         '@emotion/cache',
         '@mui/material',
         '@mui/icons-material',
+        '@popperjs/core',
         'react',
         'react-dom',
         'react-router-dom',
@@ -59,6 +60,7 @@ export default defineConfig({
       '@emotion/cache',
       '@mui/material',
       '@mui/icons-material',
+      '@popperjs/core',
       'react',
       'react-dom',
       'react-router-dom',
@@ -81,6 +83,7 @@ export default defineConfig({
       '@emotion/cache': path.resolve(__dirname, 'node_modules/@emotion/cache'),
       '@mui/material': path.resolve(__dirname, 'node_modules/@mui/material'),
       '@mui/icons-material': path.resolve(__dirname, 'node_modules/@mui/icons-material'),
+      '@popperjs/core': path.resolve(__dirname, 'node_modules/@popperjs/core'),
       'react': path.resolve(__dirname, 'node_modules/react'),
       'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
