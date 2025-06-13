@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: process.env.VITE_API_URL || 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
       },
@@ -18,23 +18,28 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        '@mui/material',
-        '@mui/icons-material',
-        '@emotion/react',
-        '@emotion/styled',
-        'axios',
-        'clsx',
-        'tiny-warning',
-        'hoist-non-react-statics',
-        '@popperjs/core',
-        'prop-types',
-        '@emotion/cache'
-      ]
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
     },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            '@mui/material',
+            '@mui/icons-material',
+            '@emotion/react',
+            '@emotion/styled'
+          ]
+        }
+      }
+    }
   },
   resolve: {
     alias: {
@@ -58,17 +63,15 @@ export default defineConfig({
     include: [
       'react',
       'react-dom',
+      'react-router-dom',
       '@mui/material',
       '@mui/icons-material',
       '@emotion/react',
       '@emotion/styled',
       'axios',
-      'clsx',
-      'tiny-warning',
-      'hoist-non-react-statics',
-      '@popperjs/core',
-      'prop-types',
-      '@emotion/cache'
+      'formik',
+      'yup',
+      'date-fns'
     ],
     exclude: [],
   },
