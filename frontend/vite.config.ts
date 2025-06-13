@@ -16,13 +16,17 @@ export default defineConfig({
         'tiny-warning',
         'hoist-non-react-statics',
         'clsx',
-        'axios'
+        'axios',
+        '@emotion/styled',
+        '@emotion/react',
+        '@emotion/cache'
       ],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           mui: ['@mui/material', '@mui/icons-material'],
-          axios: ['axios']
+          axios: ['axios'],
+          emotion: ['@emotion/styled', '@emotion/react', '@emotion/cache']
         }
       }
     }
@@ -34,7 +38,10 @@ export default defineConfig({
       'tiny-warning',
       'hoist-non-react-statics',
       'clsx',
-      'axios'
+      'axios',
+      '@emotion/styled',
+      '@emotion/react',
+      '@emotion/cache'
     ]
   },
   resolve: {
@@ -43,7 +50,10 @@ export default defineConfig({
       'tiny-warning': 'tiny-warning/dist/tiny-warning.esm.js',
       'hoist-non-react-statics': 'hoist-non-react-statics/dist/hoist-non-react-statics.esm.js',
       'clsx': 'clsx/dist/clsx.mjs',
-      'axios': 'axios/dist/axios.js'
+      'axios': 'axios/dist/axios.js',
+      '@emotion/styled': '@emotion/styled/dist/emotion-styled.esm.js',
+      '@emotion/react': '@emotion/react/dist/emotion-react.esm.js',
+      '@emotion/cache': '@emotion/cache/dist/emotion-cache.esm.js'
     }
   }
 }) 
